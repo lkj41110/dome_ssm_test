@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+    <!-- 输出规则 -->
+    <property name="pattern" value="%d{yyyyMMdd:HH:mm:ss.SSS} [%-5level] [%thread] [%C:%L] %msg%n"/>
+    <!--日志输出位置-->
+    <property name="LOG_DIR" value="${APP_HOME}/logs"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/com_lk_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_DIR}/com_lk_error_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--文件最大为10MB，最多为30个，总的不超过20GB-->
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <!-- 只记录error级别，onMatch符合的接收，不符合略过-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 处理com.lk包下面的，additivity="false"不打印上级 -->
+    <logger name="com.yingjun" additivity="true">
+        <level value="info"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!--TRACE、DEBUG、INFO、WARN 和 ERROR-->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

@@ -23,6 +23,8 @@ cnpm install -d
 
 ## 开发模式启动运行
 
+先进入项目的page文件夹
+
 ```
 npm run start
 ```
@@ -32,6 +34,8 @@ npm run start
 ## 编译代码
 
 具体编译后位置可以在package.json的script节点中修改build属性来指定。
+
+先进入项目的page文件夹
 
 ```
 npm run build

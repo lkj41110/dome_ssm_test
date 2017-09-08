@@ -9,8 +9,6 @@ import org.springframework.util.ClassUtils;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by luokai on 2017/8/24.
@@ -40,19 +38,5 @@ public class SpringTest1 {
         } catch (Exception e) {
 
         }
-    }
-
-    @Test
-    public void encode() throws Exception {
-        //String str="123iam英雄;;";
-        String str1 = "汉";
-        byte[] a = str1.getBytes("UTF-16");
-        List<Byte> b = new ArrayList<Byte>();
-        for (int i = 0; i < a.length; i++) {
-            b.add(a[i]);
-        }
-        b.stream().forEach(e-> System.out.println(Integer.toHexString(e)));
-
-
     }
 }

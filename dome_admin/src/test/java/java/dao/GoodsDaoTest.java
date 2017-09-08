@@ -1,4 +1,4 @@
-package dao;
+package java.dao;
 
 import common.config.PropertiesConfig;
 import lombok.extern.slf4j.Slf4j;

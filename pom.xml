@@ -12,6 +12,7 @@
     <modules>
         <module>dome_admin</module>
         <module>dome_core</module>
+        <module>dome_dubbo_api</module>
     </modules>
 
     <properties>

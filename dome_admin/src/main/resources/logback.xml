@@ -14,20 +14,52 @@
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR}/com_lk_error.log</file>
+    <!--info信息输出-->
+    <appender name="DOME_LK_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/dome_lk_info.log</file>
+
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${LOG_DIR}/com_lk_error_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!--文件最大为10MB，最多为30个，总的不超过20GB-->
-            <maxFileSize>10MB</maxFileSize>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>3GB</totalSizeCap>
+            <fileNamePattern>${LOG_DIR}/dome_lk_info_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- each file should be at most 50MB, keep 90 days worth of history, but at most 50GB -->
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>90</maxHistory>
+            <totalSizeCap>50GB</totalSizeCap>
         </rollingPolicy>
+
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
         </encoder>
-        <!-- 只记录error级别，onMatch符合的接收，不符合略过-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--错误信息输出-->
+    <appender name="DOME_LK_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/dome_lk_error.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_DIR}/dome_lk_error_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- each file should be at most 50MB, keep 90 days worth of history, but at most 50GB -->
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>90</maxHistory>
+            <totalSizeCap>50GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch>
@@ -35,14 +67,16 @@
         </filter>
     </appender>
 
-    <!-- 处理com.lk包下面的，additivity="false"不打印上级 -->
-    <logger name="com.yingjun" additivity="true">
+    <!--打印com包下面的信息-->
+    <logger name="com" additivity="false">
         <level value="info"/>
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="DOME_LK_INFO"/>
+        <appender-ref ref="DOME_LK_ERROR"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <!--TRACE、DEBUG、INFO、WARN 和 ERROR-->
+    <!--等级 从大到小  TRACE、DEBUG、INFO、WARN 和 ERROR-->
+    <!--将级别大于info的输出的控制台-->
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>

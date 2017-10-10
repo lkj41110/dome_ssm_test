@@ -1,10 +1,6 @@
 package springTest;
 
-import com.yingjun.ssm.model.domain.Goods;
 import org.junit.Test;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ClassUtils;
 
 import java.io.BufferedInputStream;
@@ -14,14 +10,6 @@ import java.io.InputStream;
  * Created by luokai on 2017/8/24.
  */
 public class SpringTest1 {
-
-    @Test
-    public void testSimpleLoad() {
-        BeanFactory bf = new XmlBeanFactory(new ClassPathResource("spring/spring-test.xml"));
-        Goods goods = (Goods) bf.getBean("goods");
-        System.out.println(goods);
-    }
-
 
     @Test
     public void test() {

@@ -1,6 +1,5 @@
 package com.yingjun.ssm.api;
 
-import com.yingjun.ssm.model.domain.Goods;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,18 +12,12 @@ import web.Result;
 @Slf4j
 public class GoodsController {
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public Result<Goods> test() {
-        Goods goods = new Goods();
-        goods.setId("1");
-        goods.setName("a");
-        return Result.success(goods);
-    }
 
     @RequestMapping(value = "/failTest", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public Result<Object> fail() {
+        log.error("enter fail ");
+        log.error("enter fail2");
         return Result.fail("100", "失败");
     }
 

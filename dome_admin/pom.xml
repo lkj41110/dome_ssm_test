@@ -206,4 +206,15 @@
         <!--mybatis 数据访问层 end -->
 
     </dependencies>
+
+    <build>
+        <finalName>dome_admin</finalName>
+        <plugins>
+            <!--启动tomcat自动编译，可以不用maven编译-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

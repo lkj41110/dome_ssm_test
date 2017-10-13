@@ -1,4 +1,4 @@
-package com.yingjun.ssm.swagger;
+package com.lk.dome.swagger;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

@@ -4,7 +4,8 @@
 2. swagger前后端分离，api文档生成
 3. maven 多模块应用()
 4. slf4j和logback的日志配置方式,具体logback的配置[`说明`](http://blog.csdn.net/qq_25673113/article/details/74571574)，[`logback的使用和logback.xml详解`](http://www.cnblogs.com/warking/p/5710303.html)
-
+5. 自定义拦截器的定义
+6. 异常处理
 
 
 ## 项目的最佳实践约定

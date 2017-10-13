@@ -13,10 +13,30 @@
 
     <!-- 拦截器 -->
     <mvc:interceptors>
+        <!--在自定义连接器链-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.lk.dome.interceptor.ApiInterceptor"></bean>
+            <bean class="com.lk.dome.interceptor.RequestInterceptorAggregator" autowire="byName"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+
+    <bean id="interceptorList" class="com.lk.dome.interceptor.InterceptorList"
+          autowire="byName">
+        <property name="interceptors">
+            <list>
+                <ref bean="apiInterceptorWrapper"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="apiInterceptorWrapper" class="com.lk.dome.interceptor.InterceptorWrapper"
+          autowire="byName">
+        <property name="includePattern" value="/**" />        <!-- 被拦截的URL Pattern -->
+        <property name="interceptor" ref="apiInterceptor" /> <!-- 拦截器BEAN的ID -->
+    </bean>
+
+    <bean id="apiInterceptor" class="com.lk.dome.interceptor.ApiInterceptor"/>
 
 </beans>

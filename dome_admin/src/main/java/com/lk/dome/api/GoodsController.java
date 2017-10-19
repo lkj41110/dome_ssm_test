@@ -18,7 +18,7 @@ public class GoodsController {
     public Result<Object> fail() {
         log.error("enter fail ");
         log.error("enter fail2");
-        return Result.fail("100", "失败");
+        return Result.fail(100, "失败");
     }
 
     @RequestMapping(value = "/logTest", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
@@ -32,4 +32,10 @@ public class GoodsController {
         return Result.success(null);
     }
 
+    @RequestMapping(value = "/exceptionText", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public Result<Integer> exceptionText(){
+        int i = 1 / 0;
+        return Result.success(i);
+    }
 }

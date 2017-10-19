@@ -7,15 +7,23 @@ import java.util.Map;
  * Created by luokai on 2017/7/5.
  */
 public class Result<T> {
-    public static final String FAIL_CODE = "500";
-    public static final String SUCCESS_CODE = "200";
+    public static final int FAIL_CODE = 500;
+    public static final int SUCCESS_CODE = 200;
 
     private boolean success = false;
     private Map<String, T> data = null;
     private String msg = "";
-    private String code = "500";
+    private int code = 500;
 
     public Result() {
+    }
+
+    public Result(int code, T data, String msg) {
+        Map<String, T> map = new HashMap();
+        map.put("result", data);
+        this.data = map;
+        this.msg = msg;
+        this.code = code;
     }
 
     /**
@@ -41,7 +49,7 @@ public class Result<T> {
      * @param <T>
      * @return
      */
-    public static <T> Result<T> fail(String code, String msg) {
+    public static <T> Result<T> fail(int code, String msg) {
         Result<T> r = new Result<T>();
         r.setSuccess(false);
         r.setCode(code);
@@ -71,7 +79,7 @@ public class Result<T> {
     }
 
     public Result<T> setData(T data) {
-        Map<String, T> map = new HashMap<String, T>();
+        Map<String, T> map = new HashMap();
         map.put("result", data);
         this.data = map;
         return this;
@@ -93,15 +101,6 @@ public class Result<T> {
         return this;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public Result<T> setCode(String code) {
-        this.code = code;
-        return this;
-    }
-
     public String getMsg() {
         return msg;
     }
@@ -109,5 +108,13 @@ public class Result<T> {
     public Result<T> setMsg(String msg) {
         this.msg = msg;
         return this;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

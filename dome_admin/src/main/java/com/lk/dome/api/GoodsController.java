@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import web.Result;
 
+/**
+ * @author lkj41110
+ */
 @Controller
 @RequestMapping("/main_test")
 @Slf4j

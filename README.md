@@ -5,16 +5,18 @@
 3. maven 多模块应用()
 4. slf4j和logback的日志配置方式,具体logback的配置[`说明`](http://blog.csdn.net/qq_25673113/article/details/74571574)，[`logback的使用和logback.xml详解`](http://www.cnblogs.com/warking/p/5710303.html)
 5. 自定义拦截器的定义
-6. 异常处理
+6. 异常处理(日志自动拦截，api层返回编码)
 
 
 ## 项目的最佳实践约定
 1. api层：
-做单值校验，调用service获取DTO，捕获处理异常信息，组成VO对象，返回到前端
+    - 做单值校验，调用service获取DTO，捕获处理异常信息，组成VO对象，返回到前端
 2. service层：
-处理业务，有关业务逻辑的校验
+    - 处理业务，有关业务逻辑的校验
 3. dao层:
-只与数据库层交互
+    - 只与数据库层交互
+4. 测试层：
+    - 使用mockMVC测试框架测试api接口
 
 
 

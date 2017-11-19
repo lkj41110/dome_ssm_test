@@ -57,5 +57,12 @@ public class GoodsApiTest {
         System.out.println(result); //result里存放了mockRequest和mockResponse;
     }
 
+    @Test
+    public void configTest() throws Exception{
+        //PropertiesConfig.setConfigPath("classpath:properties/*.properties");
+        MvcResult result = mockMvc.perform(get("/main_test/configTest"))//执行请求
+                .andReturn(); //返回MvcResult
+    }
+
 
 }

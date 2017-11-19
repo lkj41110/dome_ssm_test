@@ -11,12 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 @Slf4j
-public class ExceptionAdvice {
+public class ExceptionFilter {
 
     @ExceptionHandler
     public ResponseEntity defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+
+        if(e instanceof MyException){
+            //自定义处理
+        }
+
         log.error(e.getMessage(), e);
         Result res = new Result(500, "SYSTEM_EXCEPTIONS", "系统异常");
         return ResponseEntity.ok(res);
     }
+}
+
+class MyException extends RuntimeException{
+
 }

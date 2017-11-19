@@ -1,4 +1,4 @@
-package common.config;
+package com.lk.common.util;
 
 import java.lang.reflect.Method;
 

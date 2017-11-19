@@ -23,4 +23,4 @@
 ## 使用方法
 1. 前端请查看 [前端使用说明](https://github.com/lkj41110/dome_ssm_test/blob/master/dome_admin/page/README.md)
 2. 后端用tomcat启用
-3. 启动tomcat后，url + swagger-ui.html  为后端api地址
+3. 启动tomcat后，url + /swagger-ui.html  为后端api地址

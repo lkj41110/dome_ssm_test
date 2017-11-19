@@ -1,4 +1,4 @@
-package model.domal;
+package model.domain;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class UserDO {
     private String id;
     private String name;
     private Integer age;
-    private String alipayName;
+    private String password;
     private String bankAccount;
     private String nickName;
 }

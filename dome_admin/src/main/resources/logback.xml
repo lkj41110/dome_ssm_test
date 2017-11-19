@@ -4,7 +4,7 @@
         <setting name="logImpl" value="STDOUT_LOGGING" />
     </settings>
 
-    <property name="LOG_DIR" value="${APP_HOME}/logs"/>
+    <property name="LOG_DIR" value="${TOMCAT_LOG_HOME}/logs"/>
 
     <property name="pattern" value="%d{yyyyMMdd:HH:mm:ss.SSS} [%thread] [%C:%L] %-5level  %msg%n"/>
 
@@ -16,7 +16,7 @@
     </appender>
 
     <appender name="DOME_LK_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR}/lease_site_info.log</file>
+        <file>${LOG_DIR}/dome_lk_info.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
@@ -44,7 +44,7 @@
     </appender>
 
     <appender name="DOME_LK_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR}/lease_site_error.log</file>
+        <file>${LOG_DIR}/dome_lk_error.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->

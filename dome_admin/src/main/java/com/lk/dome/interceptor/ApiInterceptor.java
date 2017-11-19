@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by wanglei on 16/5/6.
+ * Created by on 16/5/6.
  * 处理跨域问题
  */
 @Slf4j

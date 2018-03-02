@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import web.Result;
 
 /**
+ * api 接口测试的接口
+ *
  * @author lkj41110
  */
 @Controller
-@RequestMapping("/main_test")
+@RequestMapping("/api_test")
 @Slf4j
-public class TestApi {
+public class ApiTestApi {
 
 
     @RequestMapping(value = "/failTest", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})

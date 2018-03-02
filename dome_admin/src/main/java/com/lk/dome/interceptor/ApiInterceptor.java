@@ -15,7 +15,7 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("=========== enter ApiInterceptor");
+        log.info("=========== enter ApiInterceptor =======");
         if (!response.containsHeader("Access-Control-Allow-Origin")) {
             response.addHeader("Access-Control-Allow-Origin", "*");
         }

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 拦截器 -->
@@ -16,27 +12,15 @@
         <!--在自定义连接器链-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.lk.dome.interceptor.RequestInterceptorAggregator" autowire="byName"/>
+            <mvc:exclude-mapping path="/transactional_test/*"/>
+            <ref bean="apiInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
-
-    <bean id="interceptorList" class="com.lk.dome.interceptor.InterceptorList"
-          autowire="byName">
-        <property name="interceptors">
-            <list>
-                <ref bean="apiInterceptorWrapper"/>
-            </list>
-        </property>
-    </bean>
-
-
-    <bean id="apiInterceptorWrapper" class="com.lk.dome.interceptor.InterceptorWrapper"
-          autowire="byName">
-        <property name="includePattern" value="/**" />        <!-- 被拦截的URL Pattern -->
-        <property name="interceptor" ref="apiInterceptor" /> <!-- 拦截器BEAN的ID -->
-    </bean>
-
     <bean id="apiInterceptor" class="com.lk.dome.interceptor.ApiInterceptor"/>
+
+
+
+
 
 </beans>

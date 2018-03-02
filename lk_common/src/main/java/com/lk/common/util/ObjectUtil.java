@@ -52,7 +52,9 @@ public class ObjectUtil {
      */
     public static <T> T convertValue(Object value, Class<T> clazz) {
 
-        if (value == null) return null;
+        if (value == null){
+            return null;
+        }
 
         String param = value.toString().trim();
         if (param.trim().equals("")) {

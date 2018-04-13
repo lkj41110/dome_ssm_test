@@ -21,7 +21,7 @@
     	1、自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter
     	2、提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持
     -->
-    <mvc:annotation-driven/>
+    <!--<mvc:annotation-driven/>-->
 
     <!--静态资源默认servlet配置
     	1、加入对静态资源的处理:js,css,gif,png
@@ -43,5 +43,14 @@
     <!--swagger的扫描项-->
     <context:component-scan base-package="springfox"/>
 
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="methodTestApi">methodTestApi</prop>
+            </props>
+        </property>
+        <property name="order" value="1"/>
+    </bean>
+    <bean id="methodTestApi" class="com.lk.dome.api.MethodTestApi"/>
 
 </beans>

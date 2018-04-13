@@ -16,29 +16,4 @@ public class TestWildcardController {
     view.addObject("attr", "TestWildcardController -> /test/**");
     return view;
   }
-
-  @RequestMapping("/test/*")
-  @ResponseBody
-  public ModelAndView test2(ModelAndView view) {
-    view.setViewName("/test/test");
-    view.addObject("attr", "TestWildcardController -> /test*");
-    return view;
-  }
-  //
-  //@RequestMapping("test?")
-  //@ResponseBody
-  //public ModelAndView test3(ModelAndView view) {
-  //  view.setViewName("/test/test");
-  //  view.addObject("attr", "TestWildcardController -> test?");
-  //  return view;
-  //}
-  //
-  @RequestMapping("test/222")
-  @ResponseBody
-  public ModelAndView test4(ModelAndView view) {
-    view.setViewName("/test/test");
-    view.addObject("attr", "TestWildcardController -> test/*");
-    return view;
-  }
-  
 }

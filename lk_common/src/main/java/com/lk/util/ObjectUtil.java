@@ -1,4 +1,4 @@
-package com.lk.common.util;
+package com.lk.util;
 
 import java.lang.reflect.Method;
 

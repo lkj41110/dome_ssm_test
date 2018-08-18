@@ -1,4 +1,4 @@
-package com.lk.common.util;
+package com.lk.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

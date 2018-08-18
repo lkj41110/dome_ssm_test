@@ -1,7 +1,7 @@
 package com.lk.common.config;
 
 
-import com.lk.common.util.PropertiesConfig;
+import com.lk.util.PropertiesConfig;
 import org.junit.Assert;
 import org.junit.Test;
 

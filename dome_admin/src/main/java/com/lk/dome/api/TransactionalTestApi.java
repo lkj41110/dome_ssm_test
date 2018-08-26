@@ -28,8 +28,8 @@ public class TransactionalTestApi {
 
     @RequestMapping(value = "/transactionalTest", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public Result<Integer> transactionalTest(boolean flag) {
-        return Result.success(transactionalService.test1(flag));
+    public Result<Integer> transactionalTest(boolean flag) throws InterruptedException {
+        return Result.success(transactionalService.test6(flag));
     }
 
 

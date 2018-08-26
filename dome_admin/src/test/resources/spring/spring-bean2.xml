@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="bean2" class="springTest.factory.Bean2" autowire="byName">
+        <constructor-arg value="999"/>
+    </bean>
+    <bean id="aService" class="springTest.factory.AServiceImple" depends-on="bService"/>
+    <bean id="bService" class="springTest.factory.BServiceImple" />
+
+    <bean id="myFactoryBean" class="springTest.factory.MyFactoryBean"/>
+</beans>

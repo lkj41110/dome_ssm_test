@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.FileSystemResource;
@@ -79,8 +78,9 @@ public class ResourceTest {
 
     @Test
     public void testApplicationContext() throws IOException {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("jdbc.properties");
-        ApplicationContext ctx2 = new FileSystemXmlApplicationContext("conf/appContext.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-bean.xml");
+
+        //ApplicationContext ctx2 = new FileSystemXmlApplicationContext("conf/appContext.xml");
     }
 
 }

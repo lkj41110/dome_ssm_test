@@ -2,8 +2,6 @@ package com.lk.dome.dao.impl;
 
 import com.lk.dome.dao.TransactionalDao;
 import com.lk.orm.dao.BaseDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author luokai

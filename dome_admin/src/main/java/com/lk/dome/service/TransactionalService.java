@@ -15,4 +15,6 @@ public interface TransactionalService {
     int test4(boolean hasException);
 
     int test5(boolean hasException);
+
+    int test6(boolean hasException) throws InterruptedException;
 }

@@ -1,5 +1,6 @@
 package com.lk.orm.dao;
 
+import com.lk.orm.mapper.OrmMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.HashMap;
@@ -22,11 +23,15 @@ public class BaseDaoImpl implements BaseDao {
     public int insert(Object object) {
         //TODO 生成sql
         Map<String, Object> params = new HashMap();
-        params.put("table", "test_int");
-        params.put("sql", "insert into test_int(`user_id`) values ('3211231_123')");
-        sqlSession.insert("ormMapper.insert", params);
-        int primaryId = ((Long) params.get("_iid")).intValue();
-        return primaryId;
+        //params.put("table", "test_int");
+        //params.put("sql", "insert into test_int(`user_id`) values ('3211231_123')");
+        //sqlSession.insert("ormMapper.insert", params);
+        String sql = "insert into test_int(`user_id`) values ('3211231_123')";
+        OrmMapper mapper = sqlSession.getMapper(OrmMapper.class);
+        mapper.insert(sql);
+        //int primaryId = ((Long) params.get("_iid")).intValue();
+        //return primaryId;
+        return 0;
     }
 
     @Override

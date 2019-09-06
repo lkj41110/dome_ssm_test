@@ -76,4 +76,15 @@ public class AopTest {
         Show show = (Show) ctx.getBean("showImpl");
         show.add();
     }
+
+    /**
+     * xml式事务
+     */
+    @Test
+    public void aopTranstional(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-aop4.xml");
+        Show show = (Show) ctx.getBean("showImpl");
+        show.add();
+
+    }
 }

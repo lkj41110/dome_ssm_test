@@ -4,7 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- mybatis-config2.xml -->
 <configuration>
-    <properties resource="mybatis/jdbc.properties"/>
+    <properties resource="mybatis/jdbc.properties">
+        <property name="hello" value="word"></property>
+    </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
     <typeAliases>
         <typeAlias alias="Article"
                    type="model.Article"/>

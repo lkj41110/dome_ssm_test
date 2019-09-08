@@ -1,3 +1,5 @@
+package Base;
+
 import dao.ArticleDao;
 import dao.AuthorDao;
 import model.Article;

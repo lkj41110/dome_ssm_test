@@ -3,6 +3,10 @@
 
 <!-- AuthorMapper.xml -->
 <mapper namespace="dao.AuthorDao">
+
+    <!-- 缓存节点 -->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
     <resultMap id="articleResult" type="model.Article">
         <id property="id" column="article_id"/>
         <result property="title" column="title"/>

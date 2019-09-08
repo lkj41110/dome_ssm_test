@@ -3,6 +3,13 @@
 
 <!-- ArticleMapper.xml -->
 <mapper namespace="dao.ArticleDao">
+
+    <!-- Mapper1.xml -->
+        <!-- Mapper1 与 Mapper2 共用一个二级缓存 -->
+    <cache-ref namespace="dao.AuthorDao"/>
+
+
+
     <resultMap id="authorResult" type="Author">
         <id property="id" column="author_id"/>
         <result property="name" column="name"/>

@@ -25,11 +25,14 @@
         <collection property="articles" resultMap="articleResult"/>
     </resultMap>
 
+    <sql id="table"> ${tableName}</sql>
+
     <select id="findOne" resultMap="authorResult">
         SELECT
         au.id, au.name, au.age, au.sex, au.email, ar.id as article_id, ar.title, ar.type, ar.content, ar.create_time
         FROM
-        author au, article ar
+        <include refid="table"><property name="tableName" value="author"/></include> au,
+        <include refid="table"><property name="tableName" value="article"/></include> ar
         WHERE
         au.id = ar.author_id AND au.id = #{id}
     </select>

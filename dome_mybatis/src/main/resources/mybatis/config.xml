@@ -42,7 +42,7 @@
         </environment>
     </environments>
     <mappers>
-        <!--<mapper resource="mapper/ArticleMapper.xml"/>-->
+        <mapper resource="mapper/ArticleMapper.xml"/>
         <mapper resource="mapper/AuthorMapper.xml"/>
     </mappers>
 </configuration>

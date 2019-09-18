@@ -6,9 +6,7 @@
 
     <!-- Mapper1.xml -->
         <!-- Mapper1 与 Mapper2 共用一个二级缓存 -->
-    <cache-ref namespace="dao.AuthorDao"/>
-
-
+<!--    <cache-ref namespace="dao.AuthorDao"/>-->
 
     <resultMap id="authorResult" type="Author">
         <id property="id" column="author_id"/>
@@ -26,15 +24,36 @@
                 typeHandler="handler.ArticleTypeHandler"/>
         <result property="content" column="content"/>
         <result property="createTime" column="create_time"/>
-        <association property="author" javaType="model.Author"
-                     resultMap="authorResult"/>
+<!--        <association property="author" javaType="model.Author"-->
+<!--                     resultMap="authorResult"/>-->
     </resultMap>
+    <sql id="selectSql">
+         ar.id, ar.author_id, ar.title, ar.type, ar.content, ar.create_time, au.name, au.age, au.sex, au.email
+    </sql>
     <select id="findOne" resultMap="articleResult">
     SELECT
-        ar.id, ar.author_id, ar.title, ar.type, ar.content, ar.create_time, au.name, au.age, au.sex, au.email
+       <include refid="selectSql"></include>
     FROM
-article ar, author au
-WHERE
-ar.author_id = au.id AND ar.id = #{id}
+    article ar, author au
+    WHERE
+    ar.author_id = au.id
+    <if test="id != null"> AND ar.id = #{id}</if>
+    </select>
+
+    <select id="findList" resultMap="articleResult">
+        SELECT
+        <include refid="selectSql"></include>
+        FROM
+        article ar, author au
+        WHERE
+        ar.author_id = au.id
+        Limit #{arg0},#{arg1}
+    </select>
+
+    <select id="count" resultType="integer">
+        SELECT
+        count(*)
+        FROM
+        article
     </select>
 </mapper>

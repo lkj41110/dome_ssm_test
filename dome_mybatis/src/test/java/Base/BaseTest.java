@@ -38,13 +38,45 @@ public class BaseTest {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             ArticleDao articleDao = session.getMapper(ArticleDao.class);
-            Article article = articleDao.findOne(1);
+            Article article = articleDao.findOne(2);
             Author author = article.getAuthor();
             //article.setAuthor(null);
             System.out.println("\nauthor info:");
             System.out.println(author);
             System.out.println("\narticles info:");
             System.out.println(article);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void testCount() {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            ArticleDao articleDao = session.getMapper(ArticleDao.class);
+            Integer article = articleDao.count();
+            System.out.println(article);
+            /**
+             * 测试一级缓存
+             */
+            //article = articleDao.count();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void testList() {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            ArticleDao articleDao = session.getMapper(ArticleDao.class);
+            /**
+             * 测试
+             */
+            List<Article> article = articleDao.findList(1, 2);
+            System.out.println(article);
+
         } finally {
             session.close();
         }

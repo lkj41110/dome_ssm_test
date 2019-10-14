@@ -5,8 +5,8 @@
 <mapper namespace="dao.ArticleDao">
 
     <!-- Mapper1.xml -->
-        <!-- Mapper1 与 Mapper2 共用一个二级缓存 -->
-<!--    <cache-ref namespace="dao.AuthorDao"/>-->
+    <!-- Mapper1 与 Mapper2 共用一个二级缓存 -->
+    <!--    <cache-ref namespace="dao.AuthorDao"/>-->
 
     <resultMap id="authorResult" type="Author">
         <id property="id" column="author_id"/>
@@ -15,29 +15,38 @@
         <!-- TODO -->
         <result property="sex" column="sex"
                 typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+        <!--
         <result property="email" column="email"/>
+        -->
     </resultMap>
     <resultMap id="articleResult" type="Article">
         <id property="id" column="id"/>
-        <result property="title" column="title"/>
+        <!--       <!测试 unMapp   <result property="title" column="title"/>-->
         <result property="type" column="type"
                 typeHandler="handler.ArticleTypeHandler"/>
         <result property="content" column="content"/>
         <result property="createTime" column="create_time"/>
-<!--        <association property="author" javaType="model.Author"-->
-<!--                     resultMap="authorResult"/>-->
+                <association property="author" javaType="model.Author"
+                             resultMap="authorResult"/>
     </resultMap>
     <sql id="selectSql">
          ar.id, ar.author_id, ar.title, ar.type, ar.content, ar.create_time, au.name, au.age, au.sex, au.email
     </sql>
+    <insert id="insert" parameterType="Article" keyProperty="id" useGeneratedKeys="true">
+        insert into article(title,author_id)
+        value(
+        #{title},
+        #{author.id}
+        );
+    </insert>
     <select id="findOne" resultMap="articleResult">
-    SELECT
-       <include refid="selectSql"></include>
-    FROM
-    article ar, author au
-    WHERE
-    ar.author_id = au.id
-    <if test="id != null"> AND ar.id = #{id}</if>
+        SELECT
+        <include refid="selectSql"></include>
+        FROM
+        article ar, author au
+        WHERE
+        ar.author_id = au.id
+        <if test="id != null">AND ar.id = #{id}</if>
     </select>
 
     <select id="findList" resultMap="articleResult">
@@ -47,8 +56,12 @@
         article ar, author au
         WHERE
         ar.author_id = au.id
-        Limit #{arg0},#{arg1}
+        Limit ${arg0},#{arg1}
     </select>
+
+    <!-- Limit #{arg0},#{arg1} -->
+    <!-- Limit #{0},#{1} -->
+    <!-- Limit #{start},#{offert} -->
 
     <select id="count" resultType="integer">
         SELECT

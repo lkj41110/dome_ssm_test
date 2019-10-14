@@ -83,6 +83,29 @@ public class BaseTest {
     }
 
     @Test
+    public void insert(){
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            ArticleDao articleDao = session.getMapper(ArticleDao.class);
+            /**
+             * 测试
+             */
+            Article article = new Article();
+            Author author = new Author();
+            author.setId(1);
+            article.setAuthor(author);
+            article.setTitle("我是测试1");
+
+            boolean insert = articleDao.insert(article);
+
+            System.out.println(article);
+
+        } finally {
+            session.close();
+        }
+    }
+
+    @Test
     public void testOne2Many() {
         SqlSession session = sqlSessionFactory.openSession();
         try {

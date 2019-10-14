@@ -3,8 +3,9 @@ package springTest.factory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class BeanFactoryPostProcessorTest {
 
     @Test
     public void factoryPostProcessorTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-bean2.xml");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-bean2.xml");
+        //ctx.registerShutdownHook();
         Bean2 bean = (Bean2) ctx.getBean("bean2");
         bean.sout();
 
@@ -30,6 +32,8 @@ public class BeanFactoryPostProcessorTest {
         //单利形式
         //Bean2 bean2 = (Bean2) ctx.getBean("bean2");
         //System.out.println(bean2.getAb());
+
+        ctx.close();
 
     }
 
@@ -75,7 +79,7 @@ interface AService {
 }
 
 @Service
-class AServiceImple implements AService, ApplicationListener<ContextRefreshedEvent> {
+class AServiceImple implements AService, ApplicationListener {
 
     public AServiceImple() {
         System.out.println("AServiceImple");
@@ -87,14 +91,17 @@ class AServiceImple implements AService, ApplicationListener<ContextRefreshedEve
     }
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("监听到消息" + event);
+    public void onApplicationEvent(ApplicationEvent applicationEvent) {
+        System.out.println("监听到消息" + applicationEvent);
+        if(applicationEvent instanceof ContextClosedEvent){
+            System.out.println("我关闭了");
+        }
     }
 }
 
 
 @Service
-class BServiceImple implements AService {
+class BServiceImple implements AService,ApplicationListener<ContextRefreshedEvent> {
 
     public BServiceImple() {
         System.out.println("BServiceImple");
@@ -103,5 +110,10 @@ class BServiceImple implements AService {
     @Override
     public void run(int aa) {
         System.out.println("123123");
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        System.out.println("看开啦");
     }
 }

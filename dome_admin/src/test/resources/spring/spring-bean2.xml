@@ -11,5 +11,5 @@
     <bean id="aService" class="springTest.factory.AServiceImple" depends-on="bService"/>
     <bean id="bService" class="springTest.factory.BServiceImple" />
 
-    <bean id="myFactoryBean" class="springTest.factory.MyFactoryBean"/>
+<!--    <bean id="myFactoryBean" class="springTest.factory.MyFactoryBean"/>-->
 </beans>

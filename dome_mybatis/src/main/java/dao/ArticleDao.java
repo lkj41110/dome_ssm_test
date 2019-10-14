@@ -11,4 +11,6 @@ public interface ArticleDao {
     Integer count();
 
     List<Article> findList(int start,int offert);
+
+    boolean insert(Article article);
 }

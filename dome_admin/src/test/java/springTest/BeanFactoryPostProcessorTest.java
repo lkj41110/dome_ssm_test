@@ -9,8 +9,11 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
 
 /**
@@ -29,12 +32,35 @@ public class BeanFactoryPostProcessorTest {
         bean.sout();
     }
 
+    @Test
+    public void getBeanTest() {
+        ClassPathResource resource = new ClassPathResource("spring/spring-bean.xml");
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(factory);
+        beanDefinitionReader.loadBeanDefinitions(resource);
+
+        Bean bean = (Bean) factory.getBean("bean");
+        bean.sout();
+
+        Bean bean1 = (Bean) factory.getBean("bean");
+        bean1.sout();
+    }
 
 }
 
 class Bean {
+    private int value;
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     public void sout() {
-        System.out.println("sout");
+        System.out.println(value);
     }
 }
 

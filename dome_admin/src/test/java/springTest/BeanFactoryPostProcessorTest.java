@@ -83,7 +83,7 @@ class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
 }
 
-class MyBeanPsotProcessor implements BeanPostProcessor {
+class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

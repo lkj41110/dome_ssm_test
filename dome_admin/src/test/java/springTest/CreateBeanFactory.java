@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
 
@@ -17,13 +15,6 @@ import org.springframework.core.io.ClassPathResource;
  */
 @Slf4j
 public class CreateBeanFactory {
-
-    @Test
-    public void factoryPostProcessorTest() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-bean.xml");
-        Bean bean = (Bean) ctx.getBean("bean");
-        bean.sout();
-    }
 
     @Test
     public void getBeanTest() {

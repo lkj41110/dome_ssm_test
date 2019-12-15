@@ -5,10 +5,10 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="bean" class="springTest.Bean">
+    <bean id="bean" class="springTest.factory.Bean">
         <property name="value" value="10"/>
     </bean>
 
-    <bean id="myBeanPostProcessor" class="springTest.MyBeanPostProcessor"/>
+    <bean id="myBeanPostProcessor" class="springTest.factory.MyBeanPostProcessor"/>
 
 </beans>

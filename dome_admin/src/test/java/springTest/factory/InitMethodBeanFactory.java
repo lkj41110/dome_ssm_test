@@ -9,6 +9,8 @@ import org.springframework.core.io.ClassPathResource;
 
 
 /**
+ * init 方法测试
+ *
  * @author luokai
  * @date 2017/11/30
  */

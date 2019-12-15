@@ -5,11 +5,11 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="beanA" class="springTest.BeanA">
+    <bean id="beanA" class="springTest.factory.BeanA">
         <property name="beanB" ref="beanB"/>
     </bean>
 
-    <bean id="beanB" class="springTest.BeanB">
+    <bean id="beanB" class="springTest.factory.BeanB">
         <property name="beanA" ref="beanA"/>
     </bean>
 </beans>

@@ -1,14 +1,19 @@
 package springTest.factory;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
+import org.springframework.core.io.ClassPathResource;
 
 
 /**
@@ -22,98 +27,75 @@ public class BeanFactoryPostProcessorTest {
 
     @Test
     public void factoryPostProcessorTest() {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-bean2.xml");
-        //ctx.registerShutdownHook();
-        Bean2 bean = (Bean2) ctx.getBean("bean2");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-bean.xml");
+        Bean bean = (Bean) ctx.getBean("bean");
         bean.sout();
-
-        bean.setAb(1);
-
-        //单利形式
-        //Bean2 bean2 = (Bean2) ctx.getBean("bean2");
-        //System.out.println(bean2.getAb());
-
-        ctx.close();
-
     }
 
+    @Test
+    public void getBeanTest() {
+        ClassPathResource resource = new ClassPathResource("spring/spring-bean.xml");
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(factory);
+        beanDefinitionReader.loadBeanDefinitions(resource);
+
+        Bean bean = (Bean) factory.getBean("bean");
+        bean.sout();
+
+        Bean bean1 = (Bean) factory.getBean("bean");
+        bean1.sout();
+    }
 
 }
 
-class Bean2 {
+class Bean {
+    private int value;
 
-    @Autowired
-    private AService bService;
+    public int getValue() {
+        return value;
+    }
 
-    private int aa;
-
-    private int ab = 0;
-
-    public Bean2(int aa) {
-        this.aa = aa;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void sout() {
-        bService.run(aa);
-    }
-
-    public AService getaService() {
-        return bService;
-    }
-
-    public void setaService(AService aService) {
-        this.bService = aService;
-    }
-
-    public int getAb() {
-        return ab;
-    }
-
-    public void setAb(int ab) {
-        this.ab = ab;
+        System.out.println(value);
     }
 }
 
-interface AService {
-    void run(int aa);
+@Data
+class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+
+
+    private int aValue = 100;
+    private int bValue = 200;
+
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+            throws BeansException {
+
+        System.out.println("调用MyBeanFactoryPostProcessor的postProcessBeanFactory");
+        BeanDefinition bd = beanFactory.getBeanDefinition("myBeanFactoryPostProcessor");
+        MutablePropertyValues pv = bd.getPropertyValues();
+        System.out.println(pv);
+
+    }
+
 }
 
-@Service
-class AServiceImple implements AService, ApplicationListener {
+class MyBeanPostProcessor implements BeanPostProcessor {
 
-    public AServiceImple() {
-        System.out.println("AServiceImple");
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("before bean" + bean);
+        System.out.println("before beanName" + beanName);
+        return bean;
     }
 
     @Override
-    public void run(int aa) {
-        System.out.println(aa);
-    }
-
-    @Override
-    public void onApplicationEvent(ApplicationEvent applicationEvent) {
-        System.out.println("监听到消息" + applicationEvent);
-        if(applicationEvent instanceof ContextClosedEvent){
-            System.out.println("我关闭了");
-        }
-    }
-}
-
-
-@Service
-class BServiceImple implements AService,ApplicationListener<ContextRefreshedEvent> {
-
-    public BServiceImple() {
-        System.out.println("BServiceImple");
-    }
-
-    @Override
-    public void run(int aa) {
-        System.out.println("123123");
-    }
-
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        System.out.println("看开啦");
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("after bean" + bean);
+        System.out.println("after beanName" + beanName);
+        return bean;
     }
 }

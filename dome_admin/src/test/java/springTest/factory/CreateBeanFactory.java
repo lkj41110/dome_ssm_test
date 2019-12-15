@@ -1,4 +1,4 @@
-package springTest;
+package springTest.factory;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 
 
 /**
- * 注意BeanFactoryPostProcessor 和 BeanPostProcessor两个是不同的接口
+ *  循环依赖 测试
  *
  * @author luokai
  * @date 2017/11/30

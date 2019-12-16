@@ -28,9 +28,20 @@ public class PropertyPlaceFactory {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-propertyPlace.xml");
 
         PropertyPlaceBean propertyPlaceBean = (PropertyPlaceBean) context.getBean("propertyPlaceBean");
-        System.out.println("student name:" + propertyPlaceBean.getName());
+        System.out.println("对象 name:" + propertyPlaceBean.getName());
     }
 
+    /**
+     * 属性替换
+     * PropertyOverrideConfigurer
+     */
+    @Test
+    public void getBeanTest2() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-propertyPlace.xml");
+
+        PropertyPlaceBean2 propertyPlaceBean = (PropertyPlaceBean2) context.getBean("propertyPlaceBean2");
+        System.out.println("对象 name:" + propertyPlaceBean.getName1());
+    }
 
 }
 
@@ -52,6 +63,7 @@ class CustomPropertyConfig extends PropertyPlaceholderConfigurer {
 
     /**
      * 覆盖这个方法，根据启动参数，动态读取配置文件
+     *
      * @param props
      * @throws IOException
      */
@@ -85,7 +97,7 @@ class CustomPropertyConfig extends PropertyPlaceholderConfigurer {
 }
 
 
-class PropertyPlaceBean{
+class PropertyPlaceBean {
     private String name;
 
     public String getName() {
@@ -94,5 +106,17 @@ class PropertyPlaceBean{
 
     public void setName(String name) {
         this.name = name;
+    }
+}
+
+class PropertyPlaceBean2 {
+    private String name1;
+
+    public String getName1() {
+        return name1;
+    }
+
+    public void setName1(String name1) {
+        this.name1 = name1;
     }
 }

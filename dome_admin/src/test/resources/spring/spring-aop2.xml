@@ -8,7 +8,8 @@
     <bean id="timeHandler" class="springTest.aop.TimeHandler" />
 
 
-    <aop:config proxy-target-class="true">
+<!--    <aop:config proxy-target-class="true">-->
+    <aop:config>
         <aop:aspect id="time" ref="timeHandler">
             <aop:pointcut id="addAllMethod" expression="execution(* springTest.aop.Dao.*(..))" />
             <aop:before method="printTime" pointcut-ref="addAllMethod" />

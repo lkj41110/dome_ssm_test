@@ -25,7 +25,20 @@ public class CreateBeanFactory {
 
         BeanA bean = (BeanA) factory.getBean("beanA");
         bean.sout();
+    }
 
+    /**
+     * 直接内部类
+     */
+    @Test
+    public void getBeanTest2(){
+        ClassPathResource resource = new ClassPathResource("spring/spring-create2.xml");
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(factory);
+        beanDefinitionReader.loadBeanDefinitions(resource);
+
+        BeanA bean = (BeanA) factory.getBean("beanA2");
+        bean.sout();
     }
 
 }

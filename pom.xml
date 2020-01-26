@@ -25,7 +25,7 @@
         <!-- 取消 Warning:java: 源值1.5已过时, 将在未来所有发行版中删除 报错 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>4.3.11.RELEASE</spring.version>
+        <spring.version>5.2.2.RELEASE</spring.version>
         <project.encoding>utf-8</project.encoding>
     </properties>
 
